@@ -20,3 +20,9 @@ function krakenpress_run_app() {
     krakenpress_load_public_files();
     krakenpress_config_loader();
 }
+
+add_action( 'init', 'krakenpress_init' );
+
+function krakenpress_init() {
+    krakenpress_custom_post_types_loader();
+}

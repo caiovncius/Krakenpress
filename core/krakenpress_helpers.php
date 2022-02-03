@@ -74,3 +74,25 @@ function krakenpress_config_loader() {
         }
     }
 }
+
+function krakenpress_custom_post_types_loader() {
+    $custom_post_types_folder = KRAKENPRESS_BASE_PATH . '/custom-post-types';
+
+    if ( $custom_post_types_folder ) {
+        $custom_post_type_files = scandir( KRAKENPRESS_BASE_PATH . '/custom-post-types' );
+
+        foreach ( $custom_post_type_files as $index => $custom_post_type_file ) {
+
+            if ( $index < 2 || $custom_post_type_file === '.gitkeep' ) {
+                continue;
+            }
+
+            $custom_post_type_file_full_path = $custom_post_types_folder  . '/' . $custom_post_type_file;
+            $custom_post_type_name = str_replace( '.php', '', $custom_post_type_file );
+            $custom_post_type_data = include_once ( $custom_post_type_file_full_path );
+
+            register_post_type( $custom_post_type_name, $custom_post_type_data );
+        }
+    }
+
+}
