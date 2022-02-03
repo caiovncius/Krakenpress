@@ -18,6 +18,5 @@ add_action( 'plugins_loaded', 'krakenpress_run_app' );
 function krakenpress_run_app() {
     krakenpress_load_admin_files();
     krakenpress_load_public_files();
-
-    krakenpress_load_lib( 'provipay-gateway' );
+    krakenpress_config_loader();
 }

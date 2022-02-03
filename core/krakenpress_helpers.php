@@ -62,3 +62,15 @@ function krakenpress_load_lib( $name ) {
 
     require_once ( $loader_file );
 }
+
+function krakenpress_config_loader() {
+    $config = KRAKENPRESS_BASE_PATH . '/config.php';
+
+    if ( file_exists( $config ) ) {
+        $config = include_once( $config );
+
+        foreach ( $config['libs'] as $lib ) {
+            krakenpress_load_lib( $lib );
+        }
+    }
+}
