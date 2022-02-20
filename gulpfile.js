@@ -9,20 +9,22 @@ var rename = require( 'gulp-rename' );
 const js_public_src_files = 'public/assets/js/**/*.js';
 const js_admin_src_files = 'admin/assets/js/**/*.js';
 const js_dest_files = 'dist/js/';
+const js_public_includes = []
+const js_admin_includes = []
 
 const sass_public_file = 'public/assets/scss/style.scss';
 const sass_admin_file = 'admin/assets/scss/style.scss';
 const sass_dest_files = 'dist/css/';
 
 function build_public_scripts() {
-    return gulp.src( js_public_src_files )
+    return gulp.src( [...js_public_includes, js_public_src_files] )
         .pipe( concat( 'scripts.js' ) )
         .pipe( uglify() )
         .pipe( gulp.dest( js_dest_files ) );
 }
 
 function build_admin_scripts() {
-    return gulp.src( js_admin_src_files )
+    return gulp.src( [...js_admin_includes, js_admin_src_files ] )
         .pipe( concat( 'admin-scripts.js' ) )
         .pipe( uglify() )
         .pipe( gulp.dest( js_dest_files ) );
